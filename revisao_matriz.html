@@ -1,11 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revisão Matriz</title>
 </head>
+
+<style>
+    body {
+        background-color: gray;
+    }
+
+    .container {
+        background-color: rgb(0, 0, 160);
+        text-align: center;
+        width: 300px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
+    }
+
+    .item {
+        background-color: rgb(168, 0, 0);
+        width: 50px;
+        margin: 5px;
+    }
+</style>
+
 <body>
-    
+
+    <div class="container" id="div_matriz">
+        <!-- <div class="item">X</div> -->
+    </div>
+    <button onclick="montarMatriz()">MontarMatriz</button>
+    <br>
+    <input type="text" id="ipt_linha" placeholder="LINHA">
+    <input type="text" id="ipt_coluna" placeholder="COLUNA">
+    <button onclick="consultarMatriz()">Consultar</button>
+    <div id="div_resposta"></div>
+    <br>
+    <button onclick="somaLinha()">Somar linha</button>
+    <div id="div_somaLinha"></div>
+    <br><br>
+
+    <button onclick="somaColuna()">Somar Coluna</button>
+    <div id="div_somaColuna"></div>
+
 </body>
+
+<script>
+    let minhaMatriz = [];
+
+    function somaColuna() {
+        let coluna = Number(ipt_coluna.value);
+
+        let resultado = (minhaMatriz[0][coluna]) + (minhaMatriz[1][coluna]) + (minhaMatriz[2][coluna]);
+        div_somaColuna.innerHTML = `A soma da coluna ${coluna} é: ${resultado}`
+    }
+
+    function somaLinha() {
+        let linha = Number(ipt_linha.value);
+
+        let resultado = (minhaMatriz[linha][0]) + (minhaMatriz[linha][1]) + (minhaMatriz[linha][2]);
+        div_somaLinha.innerHTML = `A soma da linha ${linha} é: ${resultado}`
+    }
+
+    function consultarMatriz() {
+        let linha = Number(ipt_linha.value);
+        let coluna = Number(ipt_coluna.value);
+
+        let valor = minhaMatriz[linha][coluna];
+        div_resposta.innerHTML = `O valor da linha ${linha} e coluna ${coluna} é: ${valor}`
+
+    }
+
+    function montarMatriz() {
+        let qtdLinhas = 3;
+        let qtdColunas = 3;
+
+        let valorInicial = 5;
+
+        for (let linha = 0; linha < qtdLinhas; linha++) {
+            minhaMatriz[linha] = [];
+            for (let coluna = 0; coluna < qtdColunas; coluna++) {
+                minhaMatriz[linha][coluna] = valorInicial;
+                valorInicial += 5
+
+                // ja preenchi, agr colocar no html
+                div_matriz.innerHTML += `<div class="item">${minhaMatriz[linha][coluna]}</div>`
+            }
+        }
+    }
+
+</script>
+
 </html>
